@@ -5,9 +5,9 @@
 Was muss installiert sein?
 Wie installiere ich es?
 
-## Ausführen
+## Starten
 
-Wie kann man euer Spiel ausführen?
+Wie kann man euer Spiel starten?
 
 ## Spielanleitung
 
