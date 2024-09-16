@@ -1,0 +1,5 @@
+# constants.py
+WIDTH, HEIGHT = 800, 400
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+GRAVITY = 0.6
