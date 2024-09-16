@@ -2,7 +2,7 @@
 import pygame
 import random
 from constants import WIDTH, HEIGHT, WHITE, BLACK, GRAVITY
-from dinosaur import Dinosaur  # Import the Dinosaur class
+from dinosaur import Dinosaur
 
 class Game:
     def __init__(self):
@@ -16,21 +16,22 @@ class Game:
         self.frame_count = 0
         self.dino = Dinosaur()
         self.obstacles = []
+        self.obstacle_speed = 5  # Initial obstacle speed
+        self.background = pygame.image.load('../resources/background.png').convert()  # Load background image
+        self.obstacle_image = pygame.image.load('../resources/obstacle.png').convert_alpha()  # Load obstacle image
 
     def create_obstacle(self):
-        obstacle_surface = pygame.Surface((20, 40))
-        obstacle_surface.fill(BLACK)
-        obstacle_rect = obstacle_surface.get_rect(midbottom=(random.randint(900, 1100), HEIGHT - 30))
+        obstacle_rect = self.obstacle_image.get_rect(midbottom=(random.randint(900, 1100), HEIGHT - 30))
         return obstacle_rect
 
     def move_obstacles(self):
         for obstacle in self.obstacles:
-            obstacle.x -= 5
+            obstacle.x -= self.obstacle_speed
         self.obstacles = [obstacle for obstacle in self.obstacles if obstacle.x > -20]
 
     def draw_obstacles(self):
         for obstacle in self.obstacles:
-            self.screen.blit(pygame.Surface((20, 40)), obstacle)
+            self.screen.blit(self.obstacle_image, obstacle)
 
     def check_collision(self):
         for obstacle in self.obstacles:
@@ -48,7 +49,7 @@ class Game:
     def display_game_over(self):
         self.screen.fill(WHITE)
         font = pygame.font.Font(None, 74)
-        text = font.render('Game Over. Press space to restart.', True, BLACK)
+        text = font.render('Game Over.\nPress space to restart.', True, BLACK)
         self.screen.blit(text, (WIDTH // 2 - text.get_width() // 2, HEIGHT // 2 - text.get_height() // 2))
         pygame.display.update()
 
@@ -56,6 +57,9 @@ class Game:
         font = pygame.font.Font(None, 36)
         score_surface = font.render(f'Score: {self.score}', True, BLACK)
         self.screen.blit(score_surface, (10, 10))
+
+    def update_obstacle_speed(self):
+        self.obstacle_speed = 5 + (self.score // 500)  # Increase speed every 500 points
 
     def run(self):
         while True:
@@ -90,7 +94,8 @@ class Game:
                 self.frame_count += 1
                 if self.frame_count % 10 == 0:
                     self.score += 1
-                self.screen.fill(WHITE)
+                    self.update_obstacle_speed()  # Update obstacle speed based on score
+                self.screen.blit(self.background, (0, 0))  # Draw background
                 self.dino.draw(self.screen)
                 self.draw_obstacles()
                 self.display_score()

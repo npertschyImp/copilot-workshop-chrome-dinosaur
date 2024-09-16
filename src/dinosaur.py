@@ -1,12 +1,11 @@
 # dinosaur.py
 import pygame
-from constants import HEIGHT, BLACK, GRAVITY
+from constants import HEIGHT, GRAVITY
 
 class Dinosaur:
     def __init__(self):
-        self.surface = pygame.Surface((50, 50))
-        self.surface.fill(BLACK)
-        self.rect = self.surface.get_rect(midbottom=(80, HEIGHT - 30))
+        self.image = pygame.image.load('../resources/dino.png').convert_alpha()  # Load dinosaur image
+        self.rect = self.image.get_rect(midbottom=(80, HEIGHT - 30))
         self.velocity = 0
 
     def jump(self):
@@ -19,7 +18,7 @@ class Dinosaur:
             self.rect.bottom = HEIGHT - 30
 
     def draw(self, screen):
-        screen.blit(self.surface, self.rect)
+        screen.blit(self.image, self.rect)
 
     def reset(self):
         self.rect.midbottom = (80, HEIGHT - 30)

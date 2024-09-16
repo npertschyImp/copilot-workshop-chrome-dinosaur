@@ -2,15 +2,18 @@
 
 ## Installationsanleitung
 
-Was muss installiert sein?
-Wie installiere ich es?
+### Voraussetzungen
 
-## Starten
+- Python 3.x
+- `pip` (Python package installer)
+- `pygame` library
 
-Wie kann man euer Spiel starten?
+### Installation
 
-## Spielanleitung
+1. **Python installieren**:
+   - Laden Sie die neueste Version von Python von der [offiziellen Website](https://www.python.org/downloads/) herunter und installieren Sie sie.
 
-Wie wird euer Spiel gespielt?
-Was sind die Regeln?
-Was ist das Ziel?
+2. **Virtuelle Umgebung erstellen** (optional, aber empfohlen):
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Auf Windows: venv\Scripts\activate
